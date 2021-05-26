@@ -15,11 +15,21 @@ jobs:
         run: mkdir target
 
       - name: Fill in version
-        run: sed s/PLACEHOLDER/BLA/ test.xsd > target/test.xsd
+        run: ./create_artifact.sh
 
-      - name: Release
+      - name: Store as release
+        if: startswith(github.ref, "refs/tags/")
         uses: softprops/action-gh-release@v1
         with:
-          files: target/test.xsd
+          files: target/artifact/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Store as branch artifact
+        if: startswith(github.ref, "refs/heads/")
+        uses: actions/upload-artifact@v2
+        with:
+          name: branch-artifact
+          path: |
+            target/artifact/*
+
