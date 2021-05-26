@@ -30,6 +30,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: branch-artifact
-          path: |
-            target/artifact/*
+          path: target/artifact/*.zip
 
