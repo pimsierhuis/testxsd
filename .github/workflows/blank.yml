@@ -11,10 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Create builddir
-        run: mkdir target
-
-      - name: Fill in version
+      - name: Create artifact
         run: ./create_artifact.sh
 
       - name: Store as release
