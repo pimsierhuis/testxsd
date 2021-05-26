@@ -18,7 +18,7 @@ jobs:
         run: ./create_artifact.sh
 
       - name: Store as release
-        if: startswith(github.ref, "refs/tags/")
+        if: ${{ startswith(github.ref, "refs/tags/") }}
         uses: softprops/action-gh-release@v1
         with:
           files: target/artifact/*
@@ -26,7 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Store as branch artifact
-        if: startswith(github.ref, "refs/heads/")
+        if: ${{ startswith(github.ref, "refs/heads/") }}
         uses: actions/upload-artifact@v2
         with:
           name: branch-artifact
