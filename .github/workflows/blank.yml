@@ -11,21 +11,37 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Create artifact
-        run: ./create_artifact.sh
-
-      - name: Store as release
-        if: ${{ startswith(github.ref, 'refs/tags/') }}
-        uses: softprops/action-gh-release@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          files: target/artifact/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '14'
 
-      - name: Store as branch artifact
-        if: ${{ startswith(github.ref, 'refs/heads/') }}
-        uses: actions/upload-artifact@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
         with:
-          name: branch-artifact
-          path: target/artifact/*.zip
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+
+      - name: Install markdown-pdf
+        run: npm install -g markdown-pdf --ignore-scripts
+
+
+#      - name: Create artifact
+#        run: ./create_artifact.sh
+
+#      - name: Store as release
+#        if: ${{ startswith(github.ref, 'refs/tags/') }}
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          files: target/artifact/*
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#      - name: Store as branch artifact
+#        if: ${{ startswith(github.ref, 'refs/heads/') }}
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: branch-artifact
+#          path: target/artifact/*.zip
 
