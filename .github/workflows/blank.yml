@@ -29,10 +29,8 @@ jobs:
       - name: Convert markdown to pdf
         run: md-to-pdf test.md
 
-      - name: Bla
-        run: find
-#      - name: Create artifact
-#        run: ./create_artifact.sh
+      - name: Create artifact
+        run: ./create_artifact.sh
 
 #      - name: Store as release
 #        if: ${{ startswith(github.ref, 'refs/tags/') }}
@@ -42,10 +40,10 @@ jobs:
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Store as branch artifact
-#        if: ${{ startswith(github.ref, 'refs/heads/') }}
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: branch-artifact
-#          path: target/artifact/*.zip
+      - name: Store as branch artifact
+        if: ${{ startswith(github.ref, 'refs/heads/') }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: branch-artifact
+          path: target/artifact/*.zip
 
