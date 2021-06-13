@@ -33,6 +33,8 @@ echo "Using version $VERSION"
 
 sed s/PLACEHOLDER/${VERSION}/ test.xsd > target/build/test.xsd
 
+cp test.pdf target/build/
+
 ### Create artifact
 
 ARTIFACT_FILE=testxsd-${VERSION}.zip
