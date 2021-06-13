@@ -29,6 +29,8 @@ jobs:
       - name: Convert markdown to pdf
         run: md-to-pdf test.md
 
+      - name: Bla
+        run: find
 #      - name: Create artifact
 #        run: ./create_artifact.sh
 
