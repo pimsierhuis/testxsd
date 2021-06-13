@@ -26,6 +26,8 @@ jobs:
       - name: Install markdown-pdf
         run: npm install -g markdown-pdf --ignore-scripts
 
+      - name: Convert markdown to pdf
+        run: markdown-pdf test.md
 
 #      - name: Create artifact
 #        run: ./create_artifact.sh
