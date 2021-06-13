@@ -24,10 +24,10 @@ jobs:
           restore-keys: npm-
 
       - name: Install markdown-pdf
-        run: npm install -g markdown-pdf --ignore-scripts
+        run: npm i -g md-to-pdf
 
       - name: Convert markdown to pdf
-        run: markdown-pdf test.md
+        run: md-to-pdf test.md
 
 #      - name: Create artifact
 #        run: ./create_artifact.sh
